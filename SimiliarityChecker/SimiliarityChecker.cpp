@@ -42,11 +42,6 @@ public:
 		return calcScoreBasedOnLength(lengthLong, lengthShort);
 	}
 
-	int getResult(const std::string& stringA, const std::string& stringB)
-	{
-		return compareLength(stringA, stringB);
-	}
-
 private:
 
 };
