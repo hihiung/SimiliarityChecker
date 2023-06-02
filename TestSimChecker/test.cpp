@@ -31,3 +31,8 @@ TEST(SimilarityCheck, CompareAlphabet_EQ) {
 	int result = SimChecker().compareAlphabet("ASD", "DSA");
 	EXPECT_EQ(40, result);
 }
+
+TEST(SimilarityCheck, CompareAlphabet_NEQ) {
+	int result = SimChecker().compareAlphabet("A", "BB");
+	EXPECT_EQ(0, result);
+}

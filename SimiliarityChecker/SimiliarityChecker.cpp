@@ -33,6 +33,13 @@ public:
 		return score;
 	}
 
+	bool isCharInString(char char_in, const std::string& string_in)
+	{
+		if (string_in.find(char_in) == std::string::npos)
+			return false;
+		return true;
+	}
+
 	int compareLength(const std::string& stringA, const std::string& stringB)
 	{
 		if (stringA.length() == stringB.length())
@@ -43,6 +50,7 @@ public:
 		return calcScoreBasedOnLength(lengthLong, lengthShort);
 	}
 
+
 	int compareAlphabet(const std::string& stringA, const std::string& stringB)
 	{
 		int lengthA = stringA.length();
@@ -51,7 +59,7 @@ public:
 		for (int idxA = 0; idxA < lengthA; idxA++ )
 		{
 			char charA = stringA[idxA];
-			if (stringB.find(charA) == std::string::npos)
+			if (isCharInString(charA, stringB) == false)
 				return NO_SCORE;
 		}
 		return FULL_SCORE_ALPHABET;
