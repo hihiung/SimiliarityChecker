@@ -11,11 +11,11 @@ TEST(SimilarityCheck, CompareLength_EQ) {
 	EXPECT_EQ(60, result);
 }
 
-//TEST(SimilarityCheck, CompareLength_1to2) {
-//	int result = SimChecker().compareLength("A", "BB");
-//	EXPECT_EQ(0, result);
-//}
-//
+TEST(SimilarityCheck, CompareLength_1to2) {
+	int result = SimChecker().compareLength("A", "BB");
+	EXPECT_EQ(0, result);
+}
+
 //TEST(SimilarityCheck, CompareLength_2to3) {
 //	SimChecker checker();
 //	int result = checker.compareLength("AA", "AAA");
