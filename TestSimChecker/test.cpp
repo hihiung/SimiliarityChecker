@@ -16,14 +16,12 @@ TEST(SimilarityCheck, CompareLength_1to2) {
 	EXPECT_EQ(0, result);
 }
 
-//TEST(SimilarityCheck, CompareLength_2to3) {
-//	SimChecker checker();
-//	int result = checker.compareLength("AA", "AAA");
-//	EXPECT_EQ(30, result);
-//}
-//
-//TEST(SimilarityCheck, CompareLength_5to3) {
-//	SimChecker checker();
-//	int result = checker.compareLength("AAABB", "BAA");
-//	EXPECT_EQ(20, result);
-//}
+TEST(SimilarityCheck, CompareLength_2to3) {
+	int result = SimChecker().compareLength("AA", "AAA");
+	EXPECT_EQ(30, result);
+}
+
+TEST(SimilarityCheck, CompareLength_5to3) {
+	int result = SimChecker().compareLength("AAABB", "BAA");
+	EXPECT_EQ(20, result);
+}
