@@ -38,9 +38,9 @@ public:
 		return alphabet - 'A';
 	}
 
-	int calcScoreBasedOnLength(int lengthLong, int lengthShort)
+	int calcScoreBasedOnLength(const int lengthLong, const int lengthShort)
 	{
-		int score = int((1.0f - double(lengthLong - lengthShort) / double(lengthShort)) * 60.f);
+		int score = int((1.0f - double(lengthLong - lengthShort) / double(lengthShort)) * FULL_SCORE_LENGTH);
 		score = std::max(NO_SCORE, score);
 
 		return score;
@@ -48,7 +48,7 @@ public:
 
 	int compareAlphabet(const std::string& stringA, const std::string& stringB)
 	{
-		int alphabetArray[26] = { Status::NOT_EXIST };
+		int alphabetArray[ALPHABET_SZ] = { Status::NOT_EXIST };
 
 		updateAlphabetArray(alphabetArray, stringA, stringB);
 		return calcScoreBasedOnAlphabet(alphabetArray);
@@ -78,25 +78,27 @@ public:
 
 	void updateAlphabetArray(int* alphabetArray, const std::string& stringA, const std::string& stringB)
 	{
-		int lengthA = stringA.length();
-		int lengthB = stringB.length();
-
 		// update Alphabets from string A
+		int lengthA = stringA.length();
 		for (int idxA = 0; idxA < lengthA; idxA++)
 		{
+			// mark alphabets in A as ONLY IN A, since alphabets in B not compared yet
 			char charA = stringA[idxA];
 			alphabetArray[alphabet2idx(charA)] = Status::ONLY_IN_A;
 		}
 
 		// update Alphabets from string B
+		int lengthB = stringB.length();
 		for (int idxB = 0; idxB < lengthB; idxB++)
 		{
+			// alphabets not recorded yet are only in B
 			char charB = stringB[idxB];
 			if (alphabetArray[alphabet2idx(charB)] == Status::NOT_EXIST) {
 				alphabetArray[alphabet2idx(charB)] = Status::ONLY_IN_B;
 				continue;
 			}
-			
+
+			// alphabets in A and also in B will be marked as BOTH
 			if (alphabetArray[alphabet2idx(charB)] == Status::ONLY_IN_A)
 				alphabetArray[alphabet2idx(charB)] = Status::BOTH_HAVE_THIS;
 		}
@@ -105,20 +107,20 @@ public:
 
 	int calcScoreBasedOnAlphabet(int* alphabetArray)
 	{
-		int total_alphabet = 0;
-		int both_a_and_b = 0;
+		int alphabetInAorB = 0;
+		int alphabetInBoth = 0;
 
 		for (int idx = 0; idx < ALPHABET_SZ; idx++)
 		{
 			if (alphabetArray[idx] == Status::NOT_EXIST)
 				continue;
 
-			total_alphabet++;
+			alphabetInAorB++;
 			if (alphabetArray[idx] == Status::BOTH_HAVE_THIS)
-				both_a_and_b++;
+				alphabetInBoth++;
 		}
 
-		return int((float(both_a_and_b) / float(total_alphabet)) * FULL_SCORE_ALPHABET);
+		return int((float(alphabetInBoth) / float(alphabetInAorB)) * FULL_SCORE_ALPHABET);
 
 	}
 
