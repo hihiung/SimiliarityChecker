@@ -64,18 +64,6 @@ public:
 		return calcScoreBasedOnLength(lengthLong, lengthShort);
 	}
 
-
-	int alphabetArrayCounter(const bool* alphabetArray)
-	{
-		int count = 0;
-		for (int idx = 0; idx < 26; idx++)
-		{
-			if (alphabetArray[idx] == true)
-				count++;
-		}
-		return count;
-	}
-
 	void updateAlphabetArray(int* alphabetArray, const std::string& stringA, const std::string& stringB)
 	{
 		// update Alphabets from string A
