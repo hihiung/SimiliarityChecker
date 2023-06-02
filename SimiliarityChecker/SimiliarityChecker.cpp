@@ -2,6 +2,7 @@
 #include <iostream>
 #include <cmath>
 const int FULL_SCORE_LENGTH = 60;
+const int FULL_SCORE_ALPHABET = 40;
 const int NO_SCORE = 0;
 
 class SimChecker
@@ -9,7 +10,7 @@ class SimChecker
 public:
 	SimChecker() {}
 
-	void calcLengthLongShort(int& lengthLong, int& lengthShort, 
+	void calcLengthLongShort(int& lengthLong, int& lengthShort,
 		const std::string& stringA, const std::string& stringB)
 	{
 		if (stringA.length() >= stringB.length())
@@ -40,6 +41,20 @@ public:
 		int lengthLong = 0; int lengthShort = 0;
 		calcLengthLongShort(lengthLong, lengthShort, stringA, stringB);
 		return calcScoreBasedOnLength(lengthLong, lengthShort);
+	}
+
+	int compareAlphabet(const std::string& stringA, const std::string& stringB)
+	{
+		int lengthA = stringA.length();
+		int lengthB = stringB.length();
+
+		for (int idxA = 0; idxA < lengthA; idxA++ )
+		{
+			char charA = stringA[idxA];
+			if (stringB.find(charA) == std::string::npos)
+				return NO_SCORE;
+		}
+		return FULL_SCORE_ALPHABET;
 	}
 
 private:

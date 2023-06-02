@@ -25,3 +25,9 @@ TEST(SimilarityCheck, CompareLength_5to3) {
 	int result = SimChecker().compareLength("AAABB", "BAA");
 	EXPECT_EQ(20, result);
 }
+
+
+TEST(SimilarityCheck, CompareAlphabet_EQ) {
+	int result = SimChecker().compareAlphabet("ASD", "DSA");
+	EXPECT_EQ(40, result);
+}
